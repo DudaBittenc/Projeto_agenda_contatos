@@ -59,8 +59,9 @@ class MenuDrawer extends StatelessWidget {
              );
           }
         ),
+        // Perfil
          new ListTile(
-          title: mostrarTitulo("Contatos"),
+          title: mostrarTitulo("Perfil"),
           trailing: Icon(Icons.navigate_next, size: 44),
           leading: Icon(
             Icons.account_circle_outlined,
