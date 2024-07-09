@@ -38,27 +38,6 @@ class MenuDrawer extends StatelessWidget {
              );
           }
         ),
-
-       // Contato
-        new ListTile(
-          title: mostrarTitulo("Contatos"),
-          trailing: Icon(Icons.navigate_next, size: 44),
-          leading: Icon(
-            Icons.supervisor_account,
-            color: Color.fromRGBO(212, 190, 230, 1), // mudar cor ícone  users
-            size: 42
-          ),
-
-        // Vai para a página Busca
-          onTap: () {
-            Navigator.push(
-            context,
-             MaterialPageRoute(
-              builder: (context) => Home() // Busca
-              )
-             );
-          }
-        ),
         // Perfil
          new ListTile(
           title: mostrarTitulo("Perfil"),

@@ -5,7 +5,7 @@ import 'package:flutter_application_1/View/resources/topBar.dart';
 
 class Home extends StatefulWidget {
   @override
-  State createState() => new HomeState();
+  State createState() => HomeState();
 }
 
 class HomeState extends State<Home> {
@@ -14,20 +14,29 @@ class HomeState extends State<Home> {
    return Scaffold(
     // Título do App
     appBar: new Topbar(),
-
     // Menu
     drawer: new MenuDrawer(),
     // Corpo do App
-   body: SingleChildScrollView(
-    child: Column(
-      children: [
-        // new SizedBox(height: 25),
+   body: ListView.builder(
+   // padding: EdgeInsets.fromLTRB(8, 8, 8, 75),
+    itemCount: 3,
+    itemBuilder: (BuildContext context, int index){
+      return Container(
+        color: Colors.blue,
+        padding: EdgeInsets.all(5),
+        //margin: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+        child: ListTile(
+          title: Text("OK"),
+          trailing: IconButton(
+            icon: Icon(Icons.navigate_next, color: Color.fromRGBO(207, 229, 255, 1), size: 44,),
 
-        new Container(
-         
-        )
-      ],
-    )
+            onPressed: () {
+              //
+            },
+          )
+        ),
+      );
+    },
    ),
    );
   }
