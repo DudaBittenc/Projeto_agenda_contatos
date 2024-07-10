@@ -18,15 +18,19 @@ class HomeState extends State<Home> {
     drawer: new MenuDrawer(),
     // Corpo do App
    body: ListView.builder(
-   // padding: EdgeInsets.fromLTRB(8, 8, 8, 75),
-    itemCount: 3,
+    padding: EdgeInsets.fromLTRB(8, 8, 8, 75),
+    itemCount: 7,
     itemBuilder: (BuildContext context, int index){
       return Container(
-        color: Colors.blue,
+        color: Color.fromRGBO(45, 49, 53, 1),
         padding: EdgeInsets.all(5),
-        //margin: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+        margin: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
         child: ListTile(
-          title: Text("OK"),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [Icon(Icons.account_circle_rounded, color: Color.fromRGBO(207, 229, 255, 1), size: 50,)
+            ]
+          ),
+
           trailing: IconButton(
             icon: Icon(Icons.navigate_next, color: Color.fromRGBO(207, 229, 255, 1), size: 44,),
 
@@ -38,6 +42,12 @@ class HomeState extends State<Home> {
       );
     },
    ),
+    //Botão flutuante
+    floatingActionButton: FloatingActionButton(
+      backgroundColor: Color.fromRGBO(214, 189, 237, 1),
+      child: Icon(Icons.add, color: Color.fromRGBO(213, 228, 247, 1), size: 36,),
+      onPressed: () {},
+    ),
    );
   }
   
