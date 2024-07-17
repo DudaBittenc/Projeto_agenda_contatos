@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Model/contato.dart';
+import 'package:flutter_application_1/View/cadastro.dart';
 import 'package:flutter_application_1/View/perfil.dart';
 import 'package:flutter_application_1/View/resources/menu.dart';
 import 'package:flutter_application_1/View/resources/topBar.dart';
@@ -73,10 +74,14 @@ class HomeState extends State<Home> {
     },
    ),
     //Botão flutuante
+    //Botão de Cadastro
     floatingActionButton: FloatingActionButton(
       backgroundColor: Color.fromRGBO(214, 189, 237, 1),
       child: Icon(Icons.add, color: Color.fromRGBO(213, 228, 247, 1), size: 36,),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Cadastro())
+        );
+      },
     ),
    );
   }
