@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Model/contato.dart';
+import 'package:flutter_application_1/Model/contatoService.dart';
+import 'package:flutter_application_1/View/home.dart';
 import 'package:flutter_application_1/View/resources/menu.dart';
 import 'package:flutter_application_1/View/resources/topBar.dart';
 
@@ -16,6 +20,7 @@ class CadastroState extends State<Cadastro> {
   final email = TextEditingController();
   final fone = TextEditingController();
   final foto = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -157,9 +162,42 @@ class CadastroState extends State<Cadastro> {
 
   //Cadastrar
   void cadastrar() {
-    Contato contato = Contato(id: 1, nome: nome.text, sobrenome: sobrenome.text, email: email.text, fone: fone.text, foto: foto.text);
+    ContatoService service = ContatoService();
+
+    //Guardar o último ID cadastrado
+    int ultimoId = service.listarContato().length;
+
+    Contato contato = Contato(id: ultimoId+1, nome: nome.text, sobrenome: sobrenome.text, email: email.text, fone: fone.text, foto: foto.text);
+
+    
     // Envia o objeto preenchido para adicionar na lista
+    String mensagem = service.cadastrarContato(contato);
+
+
+    //Mostra a mensagem com SnackBar
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text(
+            mensagem, 
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Color.fromRGBO(0, 51, 84, 1)),
+            ),
+          duration: Duration(milliseconds: 2000),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Color.fromRGBO(156, 203, 251, 1),       
+        )
+      );
+
+      //Redireciona para a tela Home
+      Future .delayed(
+        Duration(milliseconds: 2500),
+        () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Home())
+          );
+        }
+      );
   }
+  
   //Limpar campos
   void limpar() {
     this.nome.text = "";

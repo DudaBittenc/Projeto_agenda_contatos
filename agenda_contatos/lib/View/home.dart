@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Model/contato.dart';
+import 'package:flutter_application_1/Model/contatoService.dart';
 import 'package:flutter_application_1/View/cadastro.dart';
 import 'package:flutter_application_1/View/perfil.dart';
 import 'package:flutter_application_1/View/resources/menu.dart';
@@ -12,6 +13,9 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  //Objeto de Model
+  ContatoService service = ContatoService();
+  
   @override
   Widget build(BuildContext context) {
    return Scaffold(
