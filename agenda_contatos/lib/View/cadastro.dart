@@ -9,17 +9,19 @@ import 'package:flutter_application_1/View/resources/menu.dart';
 import 'package:flutter_application_1/View/resources/topBar.dart';
 
 class Cadastro extends StatefulWidget {
+  const Cadastro ({super.key});
   @override
-  State createState() => CadastroState();
-  // Controladores dos campos impu
+  State createState() => _CadastroState();
+  // Controladores dos campos imput
   }
 
-class CadastroState extends State<Cadastro> {
+class _CadastroState extends State<Cadastro> {
   final nome = TextEditingController();
   final sobrenome = TextEditingController();
   final email = TextEditingController();
   final fone = TextEditingController();
   final foto = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
 
   @override
@@ -145,7 +147,7 @@ class CadastroState extends State<Cadastro> {
                     color: Colors.white,
                     fontSize: 16,
                   ),
-
+                 
                   //Borda do Input
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)

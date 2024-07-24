@@ -1,11 +1,11 @@
 class Contato {
   // Atributos
-  int id;
-  String nome;
-  String sobrenome;
-  String email;
-  String fone;
-  String foto;
+  int? id;
+  final String nome;
+  final String sobrenome;
+  final String email;
+  final String fone;
+  final String foto;
 
   //Construtor
   Contato({
@@ -16,5 +16,17 @@ class Contato {
     required this.fone,
     required this.foto
   });
+
+  // Para salvar o objeto no banco de dados
+  Map <String, Object?> toMap() => {
+  'id': id,
+  'nome': nome,
+  'sobrenome': sobrenome,
+  'email': email,
+  'fone': fone,
+  'foto': foto
+};
 }
+
+
 
