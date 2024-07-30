@@ -9,7 +9,7 @@ class Contato {
 
   //Construtor
   Contato({
-    required this.id,
+    this.id,
     required this.nome,
     required this.sobrenome,
     required this.email,
@@ -26,6 +26,15 @@ class Contato {
   'fone': fone,
   'foto': foto
 };
+
+  factory Contato.fromMap(Map<String, Object?> map) => Contato(
+    id: map['id'] as int?,
+    nome: map['nome'] as String,
+    sobrenome: map['sobrenome'] as String,
+    email: map['email'] as String,
+    fone: map['fone'] as String,
+    foto: map['foto'] as String
+  );
 }
 
 

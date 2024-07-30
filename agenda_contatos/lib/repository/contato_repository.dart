@@ -6,4 +6,10 @@ class ContatoRepository {
     final db = await DbHelper.openConnection();
     return db.insert('contatos', contato.toMap());
   }
+
+  static Future <List<Contato>> findAll() async {
+    final db = await DbHelper.openConnection();
+    final result = await db.query('contatos');
+    return result.map((item) => Contato.fromMap(item)).toList();
+  }
 }

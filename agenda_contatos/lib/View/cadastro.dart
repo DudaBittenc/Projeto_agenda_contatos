@@ -1,12 +1,13 @@
 import 'dart:developer';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Model/contato.dart';
-import 'package:flutter_application_1/Model/contatoService.dart';
 import 'package:flutter_application_1/View/home.dart';
 import 'package:flutter_application_1/View/resources/menu.dart';
 import 'package:flutter_application_1/View/resources/topBar.dart';
+import 'package:flutter_application_1/repository/contato_repository.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro ({super.key});
@@ -16,11 +17,11 @@ class Cadastro extends StatefulWidget {
   }
 
 class _CadastroState extends State<Cadastro> {
-  final nome = TextEditingController();
-  final sobrenome = TextEditingController();
-  final email = TextEditingController();
-  final fone = TextEditingController();
-  final foto = TextEditingController();
+  final nomeController = TextEditingController();
+  final sobrenomeController = TextEditingController();
+  final emailController = TextEditingController();
+  final foneController = TextEditingController();
+  final fotoController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
 
@@ -54,11 +55,11 @@ class _CadastroState extends State<Cadastro> {
               ),
             ),
             //Inputs (campos)
-            campoInput("Nome", nome),
-            campoInput("Sobrenome", sobrenome),
-            campoInput("E-mail", email),
-            campoInput("Telefone",fone),
-            campoInput("Foto", foto),
+            campoInput("Nome", nomeController),
+            campoInput("Sobrenome", sobrenomeController),
+            campoInput("E-mail", emailController),
+            campoInput("Telefone",foneController),
+            campoInput("Foto", fotoController),
 
 
            
@@ -90,8 +91,10 @@ class _CadastroState extends State<Cadastro> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromRGBO(156, 203, 251, 1)
                     ),
-                    onPressed: () {
-                      cadastrar();
+                    onPressed: () async {
+                      if (formKey.currentState!.validate()) {
+                        cadastrar(context);
+                      }
                     }, 
                     );
                 }
@@ -120,7 +123,7 @@ class _CadastroState extends State<Cadastro> {
                     ),
                     onPressed: () {
                       limpar();
-                    }, 
+                    },
                     );
                 }
               ),
@@ -163,8 +166,46 @@ class _CadastroState extends State<Cadastro> {
   }
 
   //Cadastrar
-  void cadastrar() {
-    ContatoService service = ContatoService();
+  void cadastrar(BuildContext context) async {
+    final contato = Contato(
+      nome: nomeController.text, 
+      sobrenome: sobrenomeController.text,
+      email: emailController.text, 
+      fone: foneController.text,
+      foto: fotoController.text);
+    try {
+      final id = await ContatoRepository.insert(contato);
+      var snackBar = null;
+      if (id > 0) {
+        // Deu Certo
+        snackBar = SnackBar(content: Text('O contato $contato foi salvo com sucesso!'));
+      } else {
+        //Deu errado
+        snackBar = SnackBar(content: Text('Ops. Houve um erro inesperado!'));
+      }
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (error) {
+      print(error);
+    }
+     Future .delayed(
+        Duration(milliseconds: 2500),
+        () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        }
+     );
+    }
+     //Limpar campos
+  void limpar() {
+    this.nomeController.text = "";
+    this.sobrenomeController.text = "";
+    this.emailController.text = "";
+    this.foneController.text = "";
+    this.fotoController.text = "";
+  }
+}
+
+/*
+ /   ContatoService service = ContatoService();
 
     //Guardar o último ID cadastrado
     int ultimoId = service.listarContato().length;
@@ -209,3 +250,4 @@ class _CadastroState extends State<Cadastro> {
     this.foto.text = "";
   }
 }
+*/
