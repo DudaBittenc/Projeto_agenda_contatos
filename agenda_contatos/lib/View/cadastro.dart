@@ -1,8 +1,4 @@
-import 'dart:developer';
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/Model/contato.dart';
 import 'package:flutter_application_1/View/home.dart';
 import 'package:flutter_application_1/View/resources/menu.dart';
@@ -29,24 +25,24 @@ class _CadastroState extends State<Cadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  Topbar(),
-      drawer: MenuDrawer(),
+      drawer:  MenuDrawer(),
       body: SingleChildScrollView(
         // Formulário
         child: Container(
          alignment: Alignment.center,
-         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-         margin: EdgeInsets.symmetric(horizontal: 25, vertical: 35),
-         decoration: BoxDecoration(
+         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
+         margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 35),
+         decoration: const BoxDecoration(
           color: Color.fromRGBO(45, 49, 53, 1),
          ),
          child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             //Título
-            new Container(
+            Container(
               alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(bottom: 15),
-              child: Text(
+              margin: const EdgeInsets.only(bottom: 15),
+              child: const Text(
                 "Cadastro de Contato",
                 style: TextStyle(
                   color: Colors.white,
@@ -63,7 +59,7 @@ class _CadastroState extends State<Cadastro> {
 
 
            
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
             //Botões
             Row(
@@ -72,13 +68,19 @@ class _CadastroState extends State<Cadastro> {
                 // Botão Cadastrar
                 Builder(builder: (BuildContext) {
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(156, 203, 251, 1)
+                    ),
+                    onPressed: () async {
+                      cadastrar(context);
+                    },
                     child: Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15,
                         vertical: 10
                       ),
 
-                      child: Text(
+                      child: const Text(
                         "Cadastrar",
                         style: TextStyle(
                           fontSize: 16,
@@ -86,16 +88,7 @@ class _CadastroState extends State<Cadastro> {
                           fontWeight: FontWeight.bold
                         ),
                       ),
-                    ),
-
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(156, 203, 251, 1)
-                    ),
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        cadastrar(context);
-                      }
-                    }, 
+                    ), 
                     );
                 }
               ),
@@ -103,13 +96,19 @@ class _CadastroState extends State<Cadastro> {
                 //Botão Limpar
                   Builder(builder: (BuildContext) {
                   return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(156, 203, 251, 1)
+                    ),
+                    onPressed: () {
+                      limpar();
+                    },
                     child: Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15,
                         vertical: 10
                       ),
 
-                      child: Text(
+                      child: const Text(
                         "Limpar",
                         style: TextStyle(
                           fontSize: 16,
@@ -118,12 +117,6 @@ class _CadastroState extends State<Cadastro> {
                         ),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(156, 203, 251, 1)
-                    ),
-                    onPressed: () {
-                      limpar();
-                    },
                     );
                 }
               ),
@@ -139,25 +132,25 @@ class _CadastroState extends State<Cadastro> {
   //Retorna a estrutura do campo input
   Container campoInput(String nomeCampo, TextEditingController controlador) {
     return Container(
-        margin: EdgeInsets.only(bottom: 10),
+        margin: const EdgeInsets.only(bottom: 10),
               child: TextField(
                 //Atributo que recebe valor do campo
                 controller: controlador,
 
                 decoration: InputDecoration(
                   labelText: nomeCampo,
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                   ),
                  
                   //Borda do Input
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white)
                   ),
 
                   //Borda selecionada
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.white54)
                   )
                 ),
@@ -175,32 +168,32 @@ class _CadastroState extends State<Cadastro> {
       foto: fotoController.text);
     try {
       final id = await ContatoRepository.insert(contato);
-      var snackBar = null;
+      SnackBar snackBar;
       if (id > 0) {
         // Deu Certo
         snackBar = SnackBar(content: Text('O contato $contato foi salvo com sucesso!'));
       } else {
         //Deu errado
-        snackBar = SnackBar(content: Text('Ops. Houve um erro inesperado!'));
+        snackBar = const SnackBar(content: Text('Ops. Houve um erro inesperado!'));
       }
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } catch (error) {
       print(error);
     }
      Future .delayed(
-        Duration(milliseconds: 2500),
+        const Duration(milliseconds: 2500),
         () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
         }
      );
     }
      //Limpar campos
   void limpar() {
-    this.nomeController.text = "";
-    this.sobrenomeController.text = "";
-    this.emailController.text = "";
-    this.foneController.text = "";
-    this.fotoController.text = "";
+    nomeController.text = "";
+    sobrenomeController.text = "";
+    emailController.text = "";
+    foneController.text = "";
+    fotoController.text = "";
   }
 }
 

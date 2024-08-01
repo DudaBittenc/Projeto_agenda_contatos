@@ -3,6 +3,7 @@ import 'package:flutter_application_1/View/resources/menu.dart';
 import 'package:flutter_application_1/View/resources/topBar.dart';
 
 class Perfil extends StatelessWidget {
+  const Perfil ({super.key});
   @override
   Widget build(BuildContext context) {
     //Guarda o ID do Contato selecionado
@@ -39,7 +40,7 @@ class Perfil extends StatelessWidget {
             
             children: [
               new Text(
-                "Eduarda Bittencourt",
+                    "Eduarda Bittencourt",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22,

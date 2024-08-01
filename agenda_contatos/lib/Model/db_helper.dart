@@ -11,7 +11,7 @@ class DbHelper{
       version:1,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE data( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT(20) NOT NULL, sobrenome TEXT(30) NOT NULL, email VARCHAR(50) NOT NULL, fone TEXT(12) NOT NULL, foto TEXT)'
+          'CREATE TABLE contatos( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT(20) NOT NULL, sobrenome TEXT(30) NOT NULL, email VARCHAR(50) NOT NULL, fone TEXT(12) NOT NULL, foto TEXT)'
         ); 
       },
     );
