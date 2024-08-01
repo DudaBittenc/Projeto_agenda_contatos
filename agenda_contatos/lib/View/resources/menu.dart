@@ -19,7 +19,7 @@ class MenuDrawer extends StatelessWidget {
       child: ListView(
         children: [
        // Home
-        new ListTile(
+        ListTile(
           title: mostrarTitulo("Home",), 
           trailing: Icon(Icons.navigate_next, size: 44),
           leading: Icon(

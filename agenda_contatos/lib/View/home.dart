@@ -52,13 +52,7 @@ class HomeState extends State<Home> {
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: Image.asset(
-                                  "assets/img/fotos/27.png", //foto de perfil
-                                  width: 75,
-                                  height: 75,
-                                  fit: BoxFit.cover)),
+                          Icon(Icons.account_circle, size: 42, color: Color.fromRGBO(207, 229, 255, 1),),
                           Column(
                             children: [
                               Text(
@@ -112,6 +106,3 @@ class HomeState extends State<Home> {
     );
   }
 }
-
-
-

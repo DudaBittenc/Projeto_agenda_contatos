@@ -12,4 +12,12 @@ class ContatoRepository {
     final result = await db.query('contatos');
     return result.map((item) => Contato.fromMap(item)).toList();
   }
+  static Future<int> remove(int id) async {
+    final db = await DbHelper.openConnection();
+    return await db.delete(
+      'contatos',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }
