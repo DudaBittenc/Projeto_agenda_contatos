@@ -17,7 +17,6 @@ class _CadastroState extends State<Cadastro> {
   final sobrenomeController = TextEditingController();
   final emailController = TextEditingController();
   final foneController = TextEditingController();
-  final fotoController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
 
@@ -55,7 +54,6 @@ class _CadastroState extends State<Cadastro> {
             campoInput("Sobrenome", sobrenomeController),
             campoInput("E-mail", emailController),
             campoInput("Telefone",foneController),
-            campoInput("Foto", fotoController),
 
 
            
@@ -160,18 +158,18 @@ class _CadastroState extends State<Cadastro> {
 
   //Cadastrar
   void cadastrar(BuildContext context) async {
+
     final contato = Contato(
       nome: nomeController.text, 
       sobrenome: sobrenomeController.text,
       email: emailController.text, 
-      fone: foneController.text,
-      foto: fotoController.text);
+      fone: foneController.text);
     try {
       final id = await ContatoRepository.insert(contato);
       SnackBar snackBar;
       if (id > 0) {
         // Deu Certo
-        snackBar = SnackBar(content: Text('O contato $contato foi salvo com sucesso!'));
+        snackBar = SnackBar(content: Text('O contato foi salvo com sucesso!'));
       } else {
         //Deu errado
         snackBar = const SnackBar(content: Text('Ops. Houve um erro inesperado!'));
@@ -193,7 +191,6 @@ class _CadastroState extends State<Cadastro> {
     sobrenomeController.text = "";
     emailController.text = "";
     foneController.text = "";
-    fotoController.text = "";
   }
 }
 

@@ -22,33 +22,42 @@ class HomeState extends State<Home> {
       drawer:  MenuDrawer(),
       // Corpo do App
       body: FutureBuilder(
+         // Define o future que será usado para buscar os dados
         future: ContatoRepository.findAll(),
         builder: (context, snapshot) {
+            // Constrói a UI de acordo com o estado do future
           if (snapshot.connectionState == ConnectionState.none ||
               snapshot.connectionState == ConnectionState.waiting) {
+          // Exibe um indicador de carregamento enquanto os dados são buscados
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
           if(!snapshot.hasData || snapshot.data!.isEmpty){
+             // Exibe uma mensagem caso não haja dados
             return const Text("Não há contatos");
           }
-          var listOfContatos = snapshot.data!;
+          var listOfContatos = snapshot.data!; // Lista de contatos recuperada
           return RefreshIndicator(
+            // Permite atualizar a lista puxando para baixo
             onRefresh: () async {
+              // Busca os dados novamente ao puxar para baixo
               listOfContatos = await ContatoRepository.findAll();
+                // Atualiza a UI (necessário chamar setState)
               setState(() {});
             },
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 8, 75),
-              child: Container(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 75),  // Padding da lista
+              child:  ListView.builder(
+                    itemCount: listOfContatos.length, // Define o número de itens
+                    // Constrói cada item da lista
+                    itemBuilder: (context, index) {
+              return Container(
                   color: const Color.fromRGBO(45, 49, 53, 1),
                   padding: const EdgeInsets.all(5),
                   margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 5),
-                  child: ListView.builder(
-                    itemCount: listOfContatos.length,
-                    itemBuilder: (context, index) {
-                    return ListTile(
+                  child:
+                     ListTile(
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -84,8 +93,9 @@ class HomeState extends State<Home> {
                           );
                         },
                       ),
-                    );
-                  })),
+                    )
+              );
+                  }),
             ),
           );
         },
